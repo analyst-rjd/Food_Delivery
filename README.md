@@ -1,4 +1,4 @@
-#Modern Food Delivery Platform 🍔
+## Modern Food Delivery Platform 🍔
 
 Modern, responsive food delivery platform built with React and Vite. It features a sleek user interface, real-time order tracking, and a seamless ordering experience.
 
