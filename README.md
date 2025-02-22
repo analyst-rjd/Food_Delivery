@@ -43,4 +43,4 @@ Use the search bar to find:
 6. Track order status
 
 ## Link to Server 🚀 
-https://friendly-pancake-57pjjpw6r9r376g7-5173.app.github.dev/
+<a href=https://friendly-pancake-57pjjpw6r9r376g7-5173.app.github.dev/>Food Delivery App </a>
