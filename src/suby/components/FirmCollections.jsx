@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { restaurantData } from '../data/restaurants';
+import { API_URL } from '../api';
 
 const FirmCollections = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
+    const [restaurantData, setRestaurantData] = useState([]);
+
+    useEffect(() => {
+        const fetchRestaurants = async () => {
+            const response = await fetch(`${API_URL}/restaurants`);
+            const data = await response.json();
+            setRestaurantData(data);
+        };
+
+        fetchRestaurants();
+    }, []);
 
     // Get unique categories from all vendors
     const categories = ['all', ...new Set(restaurantData.vendors.flatMap(

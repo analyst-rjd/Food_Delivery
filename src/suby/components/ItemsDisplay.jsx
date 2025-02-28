@@ -1,12 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { itemData } from '../data/itemData'
 import { menuData } from '../data/menuData'
 import { FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft, FaTimes } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { API_URL } from '../api';
 
 const ItemsDisplay = () => {
-    const [displayItem] = useState(itemData)
+    const [displayItem, setDisplayItem] = useState([])
     const [selectedItem, setSelectedItem] = useState(null)
+
+    useEffect(() => {
+        const fetchItems = async () => {
+            const response = await fetch(`${API_URL}/items`);
+            const data = await response.json();
+            setDisplayItem(data);
+        };
+
+        fetchItems();
+    }, []);
 
     const handleScroll = (direction) => {
         const gallery = document.getElementById("itemGallery");

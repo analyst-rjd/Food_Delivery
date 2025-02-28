@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { API_URL } from '../api';
 import { menuData } from '../data/menuData';
 import { FaShoppingCart, FaPlus, FaMinus } from 'react-icons/fa';
 import CustomizationModal from './CustomizationModal';
@@ -7,13 +8,23 @@ import SustainabilityBadge from './SustainabilityBadge';
 
 const ProductMenu = () => {
     const { firmId } = useParams();
+    const [restaurant, setRestaurant] = useState(null);
     const [cart, setCart] = useState({});
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [customizingItem, setCustomizingItem] = useState(null);
     
-    const restaurant = menuData[firmId];
     const navigate = useNavigate();
     
+    useEffect(() => {
+        const fetchRestaurant = async () => {
+            const response = await fetch(`${API_URL}/restaurants/${firmId}`);
+            const data = await response.json();
+            setRestaurant(data);
+        };
+
+        fetchRestaurant();
+    }, [firmId]);
+
     if (!restaurant) {
         return <div>Restaurant not found</div>;
     }

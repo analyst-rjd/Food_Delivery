@@ -1,10 +1,21 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft } from "react-icons/fa";
-import { restaurantData } from '../data/restaurants';
+import { API_URL } from '../api';
 
 const Chains = () => {
     const scrollContainerRef = useRef(null);
+    const [restaurantData, setRestaurantData] = useState([]);
+
+    useEffect(() => {
+        const fetchRestaurants = async () => {
+            const response = await fetch(`${API_URL}/restaurants`);
+            const data = await response.json();
+            setRestaurantData(data);
+        };
+
+        fetchRestaurants();
+    }, []);
 
     const handleScroll = (direction) => {
         if (scrollContainerRef.current) {
